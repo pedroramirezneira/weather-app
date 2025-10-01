@@ -1,15 +1,12 @@
-import grpc
 from concurrent import futures
-import weather_pb2
-import weather_pb2_grpc
-from weather_service import get_weather
-
+from weather import weather_pb2, weather_pb2_grpc
+from weather.weather_service import get_weather
+import grpc
 
 class WeatherServiceServicer(weather_pb2_grpc.WeatherServiceServicer):
     def GetWeather(self, request, context):
-        data = get_weather(request.location)
+        data = get_weather(request.latitude, request.longitude)
         return weather_pb2.WeatherResponse(
-            location=request.location,
             temperature=data['temperature'],
             description=data['description']
         )

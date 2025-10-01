@@ -1,25 +1,16 @@
-import grpc
-from concurrent import futures
-import weather_pb2
-import weather_pb2_grpc
-from weather_service import get_weather
+import requests
 
+def get_weather(lat: float, lon: float):
+    weather_url = "https://api.open-meteo.com/v1/forecast"
+    params = {
+        "latitude": lat,
+        "longitude": lon,
+        "current_weather": True
+    }
+    resp = requests.get(weather_url, params=params).json()
 
-class WeatherServiceServicer(weather_pb2_grpc.WeatherServiceServicer):
-    def GetWeather(self, request, context):
-        data = get_weather(request.location)
-        return weather_pb2.WeatherResponse(
-            location=request.location,
-            temperature=data['temperature'],
-            description=data['description']
-        )
-
-def serve() :
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    weather_pb2_grpc.add_WeatherServiceServicer_to_server(WeatherServiceServicer(), server)
-    server.add_insecure_port('[::]:50051')
-    server.start()
-    server.wait_for_termination()
-
-if __name__ == '__main__':
-    serve()
+    current = resp.get("current_weather", {})
+    return {
+        "temperature": current.get("temperature", 0.0),
+        "description": f"Wind {current.get('windspeed', 0)} km/h"
+    }
