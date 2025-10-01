@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package location;
+
+service Location {
+    rpc GetLocation(IpAddress) returns (Point);
+}
+
+message IpAddress {
+    string address = 1;
+}
+
+message Point {
+    int32 latitude = 1;
+    int32 longitude = 2;
+}
