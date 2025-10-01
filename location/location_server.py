@@ -13,7 +13,7 @@ class LocationService(service_pb2_grpc.LocationServicer):
 def serve(port: int = 3030):
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
         service_pb2_grpc.add_LocationServicer_to_server(LocationService(), server)
-        server.add_insecure_port("localhost:{port}")
+        server.add_insecure_port(f"localhost:{port}")
         server.start()
         server.wait_for_termination()
 
