@@ -40,7 +40,7 @@ const weatherClient = new WeatherClient(
 const app = express();
 
 app.get("/", (req, res) => {
-  const ip = req.query.ipaddress || req.socket.remoteAddress;
+  const ip = req.query.ipaddress;
   locationClient.getLocation({ address: ip }, (error, response) => {
     if (error) {
       res.status(500).send(error);

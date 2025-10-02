@@ -6,7 +6,8 @@ import requests
 
 class LocationService(service_pb2_grpc.LocationServicer):
     def GetLocation(self, request, context):
-        response = requests.get("https://ipwho.is/")
+        address = (request.address or "").strip()
+        response = requests.get(f"https://ipwho.is/{address}")
         data = response.json()
         return service_pb2.Point(latitude=data["latitude"], longitude=data["longitude"])
 
