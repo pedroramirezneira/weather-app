@@ -8,7 +8,7 @@ class LocationService(service_pb2_grpc.LocationServicer):
     def GetLocation(self, request, context):
         response = requests.get("https://ipwho.is/")
         data = response.json()
-        return service_pb2.Point(data["latitude"], data["longitude"])
+        return service_pb2.Point(latitude=data["latitude"], longitude=data["longitude"])
 
 def serve(port: int = 3030):
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

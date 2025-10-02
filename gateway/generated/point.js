@@ -70,8 +70,8 @@ proto.location.Point.prototype.toObject = function(opt_includeInstance) {
  */
 proto.location.Point.toObject = function(includeInstance, msg) {
   var f, obj = {
-    latitude: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    longitude: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    latitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+    longitude: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0)
   };
 
   if (includeInstance) {
@@ -109,11 +109,11 @@ proto.location.Point.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setLatitude(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setLongitude(value);
       break;
     default:
@@ -146,15 +146,15 @@ proto.location.Point.prototype.serializeBinary = function() {
 proto.location.Point.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getLatitude();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f !== 0.0) {
+    writer.writeDouble(
       1,
       f
     );
   }
   f = message.getLongitude();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f !== 0.0) {
+    writer.writeDouble(
       2,
       f
     );
@@ -163,11 +163,11 @@ proto.location.Point.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional int32 latitude = 1;
+ * optional double latitude = 1;
  * @return {number}
  */
 proto.location.Point.prototype.getLatitude = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 1, 0.0));
 };
 
 
@@ -176,16 +176,16 @@ proto.location.Point.prototype.getLatitude = function() {
  * @return {!proto.location.Point} returns this
  */
 proto.location.Point.prototype.setLatitude = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+  return jspb.Message.setProto3FloatField(this, 1, value);
 };
 
 
 /**
- * optional int32 longitude = 2;
+ * optional double longitude = 2;
  * @return {number}
  */
 proto.location.Point.prototype.getLongitude = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
 };
 
 
@@ -194,7 +194,7 @@ proto.location.Point.prototype.getLongitude = function() {
  * @return {!proto.location.Point} returns this
  */
 proto.location.Point.prototype.setLongitude = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3FloatField(this, 2, value);
 };
 
 

@@ -1,7 +1,6 @@
 from concurrent import futures
+import weather_pb2_grpc, weather_service
 import weather_pb2
-import weather_pb2_grpc
-import weather_service
 import grpc
 
 class WeatherServiceServicer(weather_pb2_grpc.WeatherServiceServicer):
