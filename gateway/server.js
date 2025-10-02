@@ -29,11 +29,11 @@ const WeatherClient =
   weatherPkg.weather?.WeatherService || weatherPkg.WeatherService;
 
 const locationClient = new LocationClient(
-  "localhost:3030",
+  "location:3030",
   grpc.credentials.createInsecure()
 );
 const weatherClient = new WeatherClient(
-  "localhost:50051",
+  "weather:50051",
   grpc.credentials.createInsecure()
 );
 

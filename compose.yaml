@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  location:
+    build:
+      context: .
+      dockerfile: location/Dockerfile
+    ports:
+      - "3030:3030"
+    restart: unless-stopped
+
+  weather:
+    build:
+      context: .
+      dockerfile: weather/Dockerfile
+    ports:
+      - "50051:50051"
+    restart: unless-stopped
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - location
+      - weather
+    environment:
+      - NODE_ENV=production
+      - LOCATION_ADDR=location:3030
+      - WEATHER_ADDR=weather:50051
+    restart: unless-stopped

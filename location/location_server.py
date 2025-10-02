@@ -10,10 +10,10 @@ class LocationService(service_pb2_grpc.LocationServicer):
         data = response.json()
         return service_pb2.Point(latitude=data["latitude"], longitude=data["longitude"])
 
-def serve(port: int = 3030):
+def serve():
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
         service_pb2_grpc.add_LocationServicer_to_server(LocationService(), server)
-        server.add_insecure_port(f"localhost:{port}")
+        server.add_insecure_port("[::]:3030")
         server.start()
         server.wait_for_termination()
 
