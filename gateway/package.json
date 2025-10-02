@@ -2,6 +2,11 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.14.0",
     "@grpc/proto-loader": "^0.8.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "google-protobuf": "^4.0.0"
+  },
+  "devDependencies": {
+    "grpc_tools_node_protoc_ts": "^5.3.3",
+    "grpc-tools": "^1.13.0"
   }
 }
